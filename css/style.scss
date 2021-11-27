@@ -1,0 +1,430 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+// variables
+$borderRadius: 5px;
+$primaryColor: #333;
+$secondaryColor: rgb(158, 158, 158);
+$lightSecondaryColor: #f7f7f7;
+$backgroundColor: #f7f7f7;
+$separaterColor: #e6e6e6e6;
+$textColor: #fff;
+$statusDotColor: rgb(1, 95, 1);
+$statusOfflineDotColor: rgb(197, 199, 197);
+
+@mixin users__details {
+    margin-left: 15px;
+
+    span {
+        color: #333;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    p {
+        color: $secondaryColor;
+    }
+}
+
+@mixin userImageSize {
+    width: 50px;
+    height: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: $backgroundColor;
+}
+
+.wrapper {
+    background-color: #fff;
+    width: 450px;
+    border-radius: $borderRadius;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1), 0 0 22px -46px rgba(0, 0, 0, 0.5);
+}
+
+// sigup from css code
+.form {
+    padding: 25px 30px;
+
+    header {
+        font-style: 25px;
+        font-weight: 600;
+        border-bottom: 1px solid $separaterColor;
+        padding-bottom: 10px;
+    }
+
+    form {
+        margin: 20px 0;
+
+        .name_details {
+            display: flex;
+
+            .field {
+                &:first-child {
+                    margin-right: 10px;
+                }
+
+                &:last-child {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .error_txt {
+            color: #721c24;
+            background: #f8d7da;
+            padding: 10px 20px;
+            border-radius: $borderRadius;
+            text-align: center;
+            margin-bottom: 10px;
+            border: 1px solid $separaterColor;
+            display: none;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            position: relative;
+
+            label {
+                padding-bottom: 10px;
+            }
+
+            input {
+                outline: none;
+            }
+
+            i {
+                position: absolute;
+                right: 10px;
+                top: 70%;
+                transform: translateY(-50%);
+                color: #ccc;
+                cursor: pointer;
+
+                &.active::before {
+                    content: "\f070";
+                    color: $primaryColor;
+                }
+            }
+        }
+
+        .input input {
+            height: 40px;
+            width: 100%;
+            font-size: 16px;
+            padding: 0 10px;
+            border: 1px solid $separaterColor;
+            border-radius: $borderRadius;
+        }
+
+        .image {
+            label {
+                padding-bottom: 10px;
+            }
+            input {
+                font-size: 16px;
+            }
+        }
+
+        .button input {
+            margin-top: 13px;
+            height: 45px;
+            border: none;
+            outline: none;
+            background-color: #333;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: $borderRadius;
+            cursor: pointer;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 17px;
+
+            a {
+                color: #333;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+// users page related css code
+.wrapper {
+    img {
+        object-fit: cover;
+        border-radius: $borderRadius;
+    }
+}
+.users {
+    padding: 25px 30px;
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid $separaterColor;
+        padding-bottom: 20px;
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                @include userImageSize();
+            }
+
+            .user__details {
+                @include users__details();
+            }
+        }
+
+        .logout {
+            background-color: #333;
+            padding: 7px 15px;
+            color: #fff;
+            font-weight: 500;
+            border-radius: $borderRadius;
+            text-decoration: none;
+        }
+    }
+
+    .search {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
+        .text {
+            font-size: 18px;
+        }
+
+        input {
+            position: absolute;
+            height: 42px;
+            width: calc(100% - 47px);
+            border: 1px solid $separaterColor;
+            outline: none;
+            padding: 0 13px;
+            font-size: 16px;
+            border-radius: $borderRadius 0 0 $borderRadius;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+
+            &.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+
+        button {
+            width: 47px;
+            height: 42px;
+            background-color: $lightSecondaryColor;
+            color: $primaryColor;
+            outline: none;
+            border-radius: 0 $borderRadius $borderRadius 0;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            transition: all 0.5s ease;
+
+            &.active {
+                background-color: $primaryColor;
+                color: $textColor;
+
+                i::before {
+                    content: "\f00d";
+                }
+            }
+        }
+    }
+
+    .users__list {
+        max-height: 350px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid $separaterColor;
+            padding-bottom: 20px;
+            color: $primaryColor;
+            padding-right: 15px;
+            margin-bottom: 15px;
+            page-break-after: 10px;
+            transition: all 0.5s;
+            &:last-child {
+                margin-bottom: 0px;
+                border: none;
+            }
+
+            &:hover {
+                background-color: rgb(236, 236, 236);
+                width: 100%;
+                border-radius: $borderRadius;
+            }
+
+            .content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .user__details {
+                    @include users__details();
+                }
+
+                img {
+                    @include userImageSize();
+                }
+            }
+
+            .status__dot {
+                color: $statusDotColor;
+                font-size: 12px;
+            }
+
+            // we'll use this class name with php to show offline status
+            .status__dot.offline {
+                color: $statusOfflineDotColor;
+            }
+        }
+    }
+}
+
+// Chat page css code
+.chat__area {
+    header {
+        display: flex;
+        align-items: center;
+        padding: 18px 30px;
+
+        .back__icon {
+            font-size: 18px;
+            color: $primaryColor;
+        }
+
+        img {
+            @include userImageSize();
+            margin: 0 15px;
+        }
+
+        .user__details {
+            @include users__details();
+        }
+    }
+
+    .chat__box {
+        overflow-y: auto;
+        height: 400px;
+        background-color: $lightSecondaryColor;
+        padding: 10px 30px 20px 30px;
+        box-shadow: inset 0 32px 32px -32px rgba(0, 0, 0, 0.15), inset 0 -32px 32px -32px rgba(0, 0, 0, 0.15);
+
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .chat {
+            margin: 15px 0;
+            p {
+                word-wrap: break-word;
+                padding: 8px 16px;
+                box-shadow: 0 0 32px rgba(0, 0, 0, 0.2), 0 16px 16px -16px rgba(0, 0, 0, 0.3);
+            }
+        }
+        .outgoing {
+            display: flex;
+
+            .details {
+                margin-left: auto;
+                max-width: calc(100% - 130px);
+            }
+
+            p {
+                background-color: $primaryColor;
+                color: $textColor;
+                border-radius: 18px 18px 0;
+            }
+        }
+        .incoming {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .details {
+                margin-right: auto;
+                margin-left: 10px;
+                max-width: calc(100% - 130px);
+            }
+
+            p {
+                background-color: $textColor;
+                color: $primaryColor;
+                border-radius: 18px 18px 18px 0px;
+            }
+        }
+    }
+
+    .typing__area {
+        padding: 18px 30px;
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            width: calc(100% - 55px);
+            height: 42px;
+            outline: none;
+            padding: 0 13px;
+            font-size: 17px;
+            border: 1px solid $secondaryColor;
+            border-radius: $borderRadius 0 0 $borderRadius;
+        }
+
+        button {
+            width: 55px;
+            outline: none;
+            border: 1px solid $primaryColor;
+            border-radius: 0 $borderRadius $borderRadius 0;
+            background-color: $primaryColor;
+            color: $textColor;
+            cursor: pointer;
+
+            i {
+                font-size: 30px;
+            }
+        }
+    }
+}
